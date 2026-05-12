@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FamilyOS AI — Team 134 · ADNOC Schools MZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #030a1a;
+  --deep: #060f28;
+  --panel: rgba(8,20,50,0.85);
+  --panel2: rgba(6,15,40,0.9);
+  --gold: #f0b429;
+  --gold2: #ffd970;
+  --teal: #00d4aa;
+  --teal2: #00ffcc;
+  --blue: #1a8fff;
+  --red: #ff4757;
+  --green: #2ed573;
+  --purple: #a855f7;
+  --orange: #ff7043;
+  --text: #e8f0fe;
+  --muted: #7a9cc0;
+  --border: rgba(0,212,170,0.18);
+  --border2: rgba(240,180,41,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--navy);
+  color:var(--text);
+  font-family:'Nunito',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ─── BACKGROUND ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 10%, rgba(0,100,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0,212,170,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(240,180,41,0.03) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ─── GRID OVERLAY ─── */
+.grid-bg{
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,170,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,170,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(3,10,26,0.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);
+}
+.nav-logo{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.15rem;font-weight:700;
+  color:var(--teal);
+  letter-spacing:2px;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--teal);}
+.nav-badge{
+  background:linear-gradient(135deg,var(--gold),#e67e22);
+  color:#000;
+  font-size:0.68rem;
+  font-weight:700;
+  padding:4px 12px;
+  border-radius:20px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 40px 80px;
+  position:relative;z-index:1;
+}
+.hero-eyebrow{
+  font-family:'Rajdhani',sans-serif;
+  font-size:0.8rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:20px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:900;
+  line-height:1;
+  margin-bottom:10px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.4s forwards;
+}
+.hero h1 .os{color:var(--gold);}
+.hero h1 .ai{
+  background:linear-gradient(135deg,var(--teal),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(1rem,2.5vw,1.5rem);
+  color:var(--muted);
+  margin:16px 0 10px;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.6s forwards;
+}
+.hero-arabic{
+  font-size:1.1rem;
+  color:rgba(240,180,41,0.7);
+  margin-bottom:30px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.7s forwards;
+}
+.hero-author{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--panel);
+  border:1px solid var(--border2);
+  padding:10px 24px;
+  border-radius:30px;
+  font-size:0.9rem;
+  color:var(--gold2);
+  margin-bottom:50px;
+  opacity:0;
+  animation:fadeUp 0.8s 0.9s forwards;
+}
+.hero-author .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--teal);
+  animation:pulse 2s infinite;
+}
+.hero-modules{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  opacity:0;
+  animation:fadeUp 0.8s 1.1s forwards;
+}
+.hero-module{
+  display:flex;align-items:center;gap:8px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:10px 20px;
+  border-radius:12px;
+  font-size:0.8rem;
+  font-weight:600;
+  letter-spacing:0.5px;
+  transition:all 0.3s;
+  cursor:pointer;
+}
+.hero-module:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,212,170,0.15);}
+.hero-module .icon{font-size:1.1rem;}
+
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--muted);font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;
+  opacity:0;animation:fadeUp 0.8s 1.5s forwards;
+}
+.scroll-arrow{
+  width:20px;height:30px;border:2px solid var(--muted);border-radius:10px;
+  position:relative;display:flex;justify-content:center;
+}
+.scroll-arrow::after{
+  content:'';width:4px;height:8px;background:var(--teal);border-radius:2px;
+  position:absolute;top:5px;
+  animation:scrollDown 1.5s infinite;
+}
+
+/* ─── SECTIONS ─── */
+section{
+  position:relative;z-index:1;
+  padding:80px 40px;
+  max-width:1400px;margin:0 auto;
+}
+.section-full{max-width:none;padding:80px 0;}
+.section-inner{max-width:1400px;margin:0 auto;padding:0 40px;}
+
+.section-label{
+  font-family:'Rajdhani',sans-serif;
+  font-size:0.75rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::before{
+  content:'';width:30px;height:1px;background:var(--teal);
+}
+.section-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(1.6rem,3.5vw,2.5rem);
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:10px;
+}
+.section-desc{
+  color:var(--muted);
+  max-width:650px;
+  line-height:1.7;
+  font-size:0.95rem;
+  margin-bottom:50px;
+}
+
+/* ─── CARDS ─── */
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px;
+  transition:all 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.card:hover{
+  border-color:rgba(0,212,170,0.35);
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+.card:hover::before{opacity:1;}
+
+.card-gold{border-color:var(--border2);}
+.card-gold::before{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.card-gold:hover{border-color:rgba(240,180,41,0.4);box-shadow:0 20px 40px rgba(240,180,41,0.1);}
+
+/* ─── GRID LAYOUTS ─── */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:20px;}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:20px;}
+
+/* ─── STAT BOXES ─── */
+.stat-box{text-align:center;padding:24px;}
+.stat-num{
+  font-family:'Orbitron',sans-serif;
+  font-size:2.2rem;font-weight:700;
+  line-height:1;margin-bottom:6px;
+}
+.stat-label{color:var(--muted);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;}
+.stat-change{
+  font-size:0.75rem;
+  margin-top:6px;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.up{color:var(--green);}
+.down{color:var(--red);}
+
+/* ─── CHART BARS ─── */
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px;}
+.bar{
+  flex:1;border-radius:6px 6px 0 0;
+  min-width:0;
+  position:relative;
+  transition:all 0.3s;
+  cursor:pointer;
+}
+.bar:hover{filter:brightness(1.3);}
+.bar-label{
+  position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);
+  font-size:0.65rem;color:var(--muted);white-space:nowrap;
+}
+.bar-val{
+  position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+  font-size:0.7rem;font-weight:700;white-space:nowrap;
+}
+
+/* ─── DONUT CHART ─── */
+.donut-wrap{position:relative;width:120px;height:120px;flex-shrink:0;}
+.donut-wrap svg{transform:rotate(-90deg);}
+.donut-label{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;
+}
+.donut-label .val{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:700;}
+.donut-label .sub{font-size:0.6rem;color:var(--muted);}
+
+/* ─── LINE SPARKLINE ─── */
+.sparkline{display:block;overflow:visible;}
+
+/* ─── HEALTH MONITOR ─── */
+.health-ring{
+  position:relative;width:80px;height:80px;
+}
+.health-ring svg{transform:rotate(-90deg);}
+.health-ring .ring-label{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;text-align:center;
+}
+
+/* ─── PROGRESS BARS ─── */
+.progress-bar{
+  height:8px;background:rgba(255,255,255,0.07);
+  border-radius:4px;overflow:hidden;margin:6px 0 16px;
+}
+.progress-fill{
+  height:100%;border-radius:4px;
+  transition:width 1s ease;
+}
+
+/* ─── TIMELINE ─── */
+.timeline{display:flex;flex-direction:column;gap:14px;}
+.tl-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 18px;
+  background:rgba(255,255,255,0.03);
+  border-radius:10px;
+  border-left:3px solid transparent;
+}
+.tl-dot{
+  width:10px;height:10px;border-radius:50%;
+  flex-shrink:0;margin-top:4px;
+}
+.tl-time{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.tl-text{font-size:0.85rem;font-weight:600;}
+
+/* ─── ALERT CARD ─── */
+.alert{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  border-radius:10px;
+  border:1px solid;
+  margin-bottom:10px;
+  font-size:0.85rem;
+}
+.alert-warn{background:rgba(255,165,0,0.08);border-color:rgba(255,165,0,0.3);}
+.alert-ok{background:rgba(46,213,115,0.08);border-color:rgba(46,213,115,0.3);}
+.alert-crit{background:rgba(255,71,87,0.08);border-color:rgba(255,71,87,0.3);}
+.alert-icon{font-size:1.3rem;flex-shrink:0;}
+.alert-title{font-weight:700;margin-bottom:2px;}
+.alert-sub{color:var(--muted);font-size:0.78rem;}
+
+/* ─── TAGS ─── */
+.tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:20px;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.5px;
+  text-transform:uppercase;
+}
+.tag-teal{background:rgba(0,212,170,0.12);color:var(--teal);border:1px solid rgba(0,212,170,0.25);}
+.tag-gold{background:rgba(240,180,41,0.12);color:var(--gold);border:1px solid rgba(240,180,41,0.25);}
+.tag-red{background:rgba(255,71,87,0.12);color:var(--red);border:1px solid rgba(255,71,87,0.25);}
+.tag-green{background:rgba(46,213,115,0.12);color:var(--green);border:1px solid rgba(46,213,115,0.25);}
+.tag-blue{background:rgba(26,143,255,0.12);color:var(--blue);border:1px solid rgba(26,143,255,0.25);}
+.tag-purple{background:rgba(168,85,247,0.12);color:var(--purple);border:1px solid rgba(168,85,247,0.25);}
+
+/* ─── SCORE RING ─── */
+.score-ring{
+  width:140px;height:140px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.score-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.score-inner{text-align:center;z-index:1;}
+.score-num{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:700;}
+.score-sub{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* ─── SUSTAINABILITY ─── */
+.sustain-bg{
+  background:linear-gradient(135deg,rgba(3,10,26,0.95),rgba(0,30,20,0.95));
+  border-top:1px solid rgba(46,213,115,0.15);
+  border-bottom:1px solid rgba(46,213,115,0.15);
+}
+.uae-gradient{
+  background:linear-gradient(135deg,#00d4aa,#1a8fff,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ─── UAE MAP DOTS ─── */
+.uae-map{
+  position:relative;
+  width:100%;height:200px;
+  background:radial-gradient(ellipse at center,rgba(0,212,170,0.05),transparent 70%);
+  border-radius:12px;
+  overflow:hidden;
+}
+.map-dot{
+  position:absolute;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--teal);
+  box-shadow:0 0 12px var(--teal);
+}
+.map-dot::after{
+  content:'';
+  position:absolute;top:-5px;left:-5px;
+  width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--teal);
+  opacity:0.4;
+  animation:ripple 2s infinite;
+}
+.map-dot.gold{background:var(--gold);box-shadow:0 0 12px var(--gold);}
+.map-dot.gold::after{border-color:var(--gold);}
+.map-dot.blue{background:var(--blue);box-shadow:0 0 12px var(--blue);}
+.map-dot.blue::after{border-color:var(--blue);}
+.map-line{
+  position:absolute;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  opacity:0.3;
+  animation:scanLine 4s infinite;
+}
+
+/* ─── ECO METER ─── */
+.eco-meter{
+  display:flex;flex-direction:column;gap:12px;
+}
+.eco-row{
+  display:flex;align-items:center;gap:12px;
+}
+.eco-icon{font-size:1.2rem;width:30px;text-align:center;}
+.eco-label{font-size:0.8rem;color:var(--muted);width:130px;flex-shrink:0;}
+.eco-bar{flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden;}
+.eco-fill{height:100%;border-radius:5px;position:relative;overflow:hidden;}
+.eco-fill::after{
+  content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  animation:shimmer 2s infinite;
+}
+.eco-val{font-size:0.8rem;font-weight:700;width:40px;text-align:right;}
+
+/* ─── MEDICATION TABLE ─── */
+.med-table{width:100%;border-collapse:collapse;}
+.med-table th{
+  font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+.med-table td{
+  padding:12px 14px;font-size:0.85rem;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.med-table tr:last-child td{border-bottom:none;}
+.med-status{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:0.72rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  position:relative;z-index:1;
+  text-align:center;padding:50px 40px;
+  border-top:1px solid var(--border);
+}
+.footer-logo{
+  font-family:'Orbitron',sans-serif;
+  font-size:2rem;font-weight:900;
+  color:var(--teal);
+  margin-bottom:10px;
+}
+.footer-logo span{color:var(--gold);}
+.footer-info{color:var(--muted);font-size:0.85rem;line-height:1.8;}
+.footer-hackathon{
+  margin-top:20px;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--panel);
+  border:1px solid var(--border2);
+  padding:10px 24px;border-radius:30px;
+  font-size:0.8rem;color:var(--gold2);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,212,170,0.4);}
+  50%{box-shadow:0 0 0 8px rgba(0,212,170,0);}
+}
+@keyframes scrollDown{
+  0%{opacity:1;top:5px;}
+  100%{opacity:0;top:18px;}
+}
+@keyframes ripple{
+  0%{transform:scale(1);opacity:0.5;}
+  100%{transform:scale(3);opacity:0;}
+}
+@keyframes shimmer{
+  0%{left:-100%;}100%{left:100%;}
+}
+@keyframes scanLine{
+  0%{transform:translateX(-100%);}100%{transform:translateX(200%);}
+}
+
+/* ─── LANGUAGE TOGGLE ─── */
+.lang-toggle {
+  display:flex;align-items:center;gap:6px;
+  background:rgba(0,212,170,0.08);
+  border:1px solid rgba(0,212,170,0.3);
+  color:var(--teal);
+  font-family:'Rajdhani',sans-serif;
+  font-size:0.78rem;font-weight:700;
+  letter-spacing:1px;
+  padding:6px 14px;border-radius:20px;
+  cursor:pointer;transition:all 0.25s;
+  text-transform:uppercase;
+}
+.lang-toggle:hover{background:rgba(0,212,170,0.18);border-color:var(--teal);box-shadow:0 0 12px rgba(0,212,170,0.2);}
+.lang-icon{font-size:1rem;}
+
+/* ─── RTL ARABIC MODE ─── */
+body.lang-ar {
+  direction: rtl;
+  font-family: 'Segoe UI', 'Noto Sans Arabic', 'Cairo', Tahoma, sans-serif;
+}
+body.lang-ar nav { flex-direction:row-reverse; }
+body.lang-ar .nav-links { flex-direction:row-reverse; }
+body.lang-ar .section-label { flex-direction:row-reverse; }
+body.lang-ar .section-label::before { display:none; }
+body.lang-ar .section-label::after { content:''; width:30px;height:1px;background:var(--teal); }
+body.lang-ar .hero-author { flex-direction:row-reverse; }
+body.lang-ar .stat-change { flex-direction:row-reverse; }
+body.lang-ar .alert { flex-direction:row-reverse; }
+body.lang-ar .tl-item { flex-direction:row-reverse; }
+body.lang-ar .eco-row { flex-direction:row-reverse; }
+body.lang-ar .sensor-node { flex-direction:row-reverse; }
+
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="nav-logo">Family<span>OS</span> AI</div>
+  <div class="nav-links">
+    <a href="#financial" data-i18n="nav-financial">Financial</a>
+    <a href="#health" data-i18n="nav-health">Health</a>
+    <a href="#sustainability" data-i18n="nav-sustainability">Sustainability</a>
+    <a href="#impact" data-i18n="nav-impact">Impact</a>
+    <a href="#uae" data-i18n="nav-uae">UAE Vision</a>
+  </div>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">
+    <span class="lang-icon">🌐</span>
+    <span id="langLabel">العربية</span>
+  </button>
+  <div class="nav-badge" data-i18n="nav-badge">COE Hackathon 2026</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow" data-i18n="hero-eyebrow">5th Annual COE Hackathon · Abu Dhabi University · 2026</div>
+  <h1>Family<span class="os">OS</span> <span class="ai">AI</span></h1>
+  <div class="hero-sub" data-i18n="hero-sub">Artificial Intelligence for the Family</div>
+  <div class="hero-arabic">الذكاء الاصطناعي من أجل الأسرة</div>
+  <div class="hero-author">
+    <span class="dot"></span>
+    May Ahmed Mourad &nbsp;·&nbsp; Meerah Rashed Al Mazrouei &nbsp;·&nbsp; Shamsa Faris Al Mazrouei
+  </div>
+  <div class="hero-modules">
+    <div class="hero-module"><span class="icon">💰</span> <span data-i18n="mod-financial">Financial AI</span></div>
+    <div class="hero-module"><span class="icon">🏥</span> <span data-i18n="mod-health">Elderly Health Monitor</span></div>
+    <div class="hero-module"><span class="icon">🌱</span> <span data-i18n="mod-sustain">Sustainability Engine</span></div>
+    <div class="hero-module"><span class="icon">🇦🇪</span> <span data-i18n="mod-uae">UAE Smart Cities</span></div>
+    <div class="hero-module"><span class="icon">🛡️</span> <span data-i18n="mod-ethics">Ethical AI</span></div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+    <span data-i18n="scroll-hint">Scroll to Explore</span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Family<span>OS</span> AI</div>
+  <div class="footer-info">
+    Team 134 &nbsp;·&nbsp; ADNOC Schools MZ<br>
+    <span data-i18n="footer-sub">Submission Window: May 8 – May 13, 2026 · Online</span>
+  </div>
+  <div class="footer-hackathon" data-i18n="footer-hackathon">🏆 5th Annual COE Hackathon 2026 · AI for the Family</div>
+</footer>
+
+<script>
+console.log('FamilyOS AI — Team 134 · ADNOC Schools MZ');
+
+// ─── ARABIC / ENGLISH TRANSLATIONS ───
+const translations = {
+  en: {
+    // NAV
+    'nav-financial':'Financial','nav-health':'Health','nav-sustainability':'Sustainability',
+    'nav-impact':'Impact','nav-uae':'UAE Vision','nav-badge':'COE Hackathon 2026',
+    // HERO
+    'hero-eyebrow':'5th Annual COE Hackathon · Abu Dhabi University · 2026',
+    'hero-sub':'Artificial Intelligence for the Family','scroll-hint':'Scroll to Explore',
+    'mod-financial':'Financial AI','mod-health':'Elderly Health Monitor',
+    'mod-sustain':'Sustainability Engine','mod-uae':'UAE Smart Cities','mod-ethics':'Ethical AI',
+    // IMPACT STATS
+    'stat-modules':'Core AI Modules','stat-savings':'Avg Annual Savings',
+    'stat-elderly':'Elderly Safety Score','stat-carbon':'Carbon Footprint Reduction',
+    // SUSTAINABILITY
+    'sus-label':'Module 03 · UAE Smart Future',
+    'sus-title':'AI for Sustainable Families<br><span class="uae-gradient">& Smart UAE Communities</span>',
+    // FIX: Using double quotes to allow apostrophes in text
+    'sus-desc': "FamilyOS AI is not just a family app — it is a building block of the UAE's smart, sustainable, and AI-driven national future. Every family that uses it contributes to a cleaner, smarter, and more resilient nation.",
+    'sus-p1':'Smart Cities',
+    'sus-p1d': "Feeds anonymised household data into Abu Dhabi's city intelligence grid to optimise urban services and reduce waste.",
+    'sus-p2':'Energy Efficiency','sus-p2d':'AI learns appliance usage patterns and recommends optimal schedules to cut energy bills and reduce grid demand.',
+    'sus-p3':'Water Awareness',
+    'sus-p3d': "Smart water usage tracking with AI-generated tips to reduce household consumption in the UAE's arid climate.",
+    'sus-p4':'Green Transport','sus-p4d':'AI trip-batching and carpooling suggestions reduce unnecessary journeys, cutting emissions and fuel costs.',
+    // FOOTER
+    'footer-hackathon':'🏆 5th Annual COE Hackathon 2026 · AI for the Family',
+    'footer-sub':'Submission Window: May 8 – May 13, 2026 · Online',
+  },
+  ar: {
+    'nav-financial':'مالي','nav-health':'صحة','nav-sustainability':'استدامة',
+    'nav-impact':'تأثير','nav-uae':'رؤية الإمارات','nav-badge':'هاكاثون 2026',
+    'hero-eyebrow':'الهاكاثون السنوي الخامس · جامعة أبوظبي · 2026',
+    'hero-sub':'الذكاء الاصطناعي من أجل الأسرة','scroll-hint':'استكشف المزيد',
+    'sus-label':'الوحدة 03 · مستقبل الإمارات الذكي',
+    'sus-title':'الذكاء الاصطناعي للأسر المستدامة<br><span class="uae-gradient">& المجتمعات الإماراتية الذكية</span>',
+    'footer-hackathon':'🏆 الهاكاثون السنوي الخامس لكلية الهندسة 2026 · الذكاء الاصطناعي من أجل الأسرة',
+    'footer-sub':'نافذة التقديم: 8 مايو – 13 مايو 2026 · أونلاين',
+  }
+};
+
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  applyTranslations(currentLang);
+  document.getElementById('langLabel').textContent = currentLang === 'en' ? 'العربية' : 'English';
+  if (currentLang === 'ar') {
+    document.body.classList.add('lang-ar');
+    document.documentElement.setAttribute('lang', 'ar');
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.body.classList.remove('lang-ar');
+    document.documentElement.setAttribute('lang', 'en');
+    document.documentElement.removeAttribute('dir');
+  }
+}
+
+function applyTranslations(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+</script>
+</body>
+</html>
